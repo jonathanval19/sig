@@ -1,0 +1,138 @@
+<div>
+  <h2 id="page-heading" data-cy="TransaccionHeading">
+    <span>Transacciones</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refrescar lista</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-transaccion"
+        [routerLink]="['/transaccion/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Crear nuevo Transacción </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="transaccions?.length === 0">
+    <span>Ningún Transaccions encontrado</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="transaccions && transaccions.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span>ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="propietario">
+            <div class="d-flex">
+              <span>Propietario</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="titulo">
+            <div class="d-flex">
+              <span>Titulo</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="disposicion">
+            <div class="d-flex">
+              <span>Disposicion</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="codigoDocumento">
+            <div class="d-flex">
+              <span>Codigo Documento</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="numeracionDocumento">
+            <div class="d-flex">
+              <span>Numeracion Documento</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="proceso.id">
+            <div class="d-flex">
+              <span>Proceso</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="tipoDocumento.id">
+            <div class="d-flex">
+              <span>Tipo Documento</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let transaccion of transaccions; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/transaccion', transaccion.id, 'view']">{{ transaccion.id }}</a>
+          </td>
+          <td>{{ transaccion.propietario }}</td>
+          <td>{{ transaccion.titulo }}</td>
+          <td>{{ transaccion.disposicion }}</td>
+          <td>{{ transaccion.codigoDocumento }}</td>
+          <td>{{ transaccion.numeracionDocumento }}</td>
+          <td>
+            <div *ngIf="transaccion.proceso">
+              <a [routerLink]="['/proceso', transaccion.proceso.id, 'view']">{{ transaccion.proceso.descripcion }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="transaccion.tipoDocumento">
+              <a [routerLink]="['/tipo-documento', transaccion.tipoDocumento.id, 'view']">{{ transaccion.tipoDocumento.descripcion }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/transaccion', transaccion.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">Vista</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/transaccion', transaccion.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Editar</span>
+              </button>
+
+              <button type="submit" (click)="delete(transaccion)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Eliminar</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

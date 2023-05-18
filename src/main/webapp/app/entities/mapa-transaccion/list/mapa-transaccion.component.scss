@@ -1,0 +1,86 @@
+@import '~bootstrap/scss/functions';
+@import '~bootswatch/dist/litera/variables';
+@import '~bootstrap/scss/variables';
+
+/* ==========================================================================
+Mapa de procesos - Gráfico pantallas grandes
+========================================================================== */
+
+@media (min-width: 992px) and (max-width: 1920px) {
+    .btnproceso {
+        border: 1px solid rgb(211, 202, 202);
+        border-radius: 10px;
+    }
+
+    .estilo-transacciones {
+        height: 60px;
+        width: 50%;
+        font-size: 17px;
+        background-color: rgb(255, 235, 174);
+        color: black;
+        margin: 5px;
+    }
+
+    .panel-transacciones {
+        margin: 5px;
+        text-align: center;
+    }
+}
+
+/* ==========================================================================
+Mapa de procesos - Gráfico pantallas medianas
+========================================================================== */
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .btnproceso {
+        border: 1px solid rgb(211, 202, 202);
+        border-radius: 10px;
+    }
+
+    .estilo-transacciones {
+        height: 60px;
+        width: 75%;
+        font-size: 17px;
+        background-color: rgb(255, 235, 174);
+        color: black;
+        margin: 5px;
+    }
+
+    .panel-transacciones {
+        margin: 5px;
+        text-align: center;
+    }
+}
+
+/* ==========================================================================
+Mapa de procesos - Gráfico pantallas pequeñas
+========================================================================== */
+
+@media (max-width: 767px) {
+    .btnproceso {
+        border: 1px solid rgb(211, 202, 202);
+        border-radius: 10px;
+    }
+
+    .estilo-transacciones {
+        height: 110px;
+        width: 90%;
+        font-size: 17px;
+        background-color: rgb(255, 235, 174);
+        color: black;
+        margin: 7px;
+    }
+
+    .panel-transacciones {
+        margin: 5px;
+        text-align: center;
+    }
+}
+
+.titulo {
+    text-align: center;
+}
+
+.subtitulo {
+    font-size: 10px;
+}

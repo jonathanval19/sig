@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="transaccion">
+      <h2 data-cy="transaccionDetailsHeading"><span>Transaccion</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+       <!--  <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ transaccion.id }}</span>
+        </dd> -->
+        <dt><span>Dueño de proceso</span></dt>
+        <dd>
+          <span>{{ transaccion.propietario }}</span>
+        </dd>
+        <dt><span>Titulo</span></dt>
+        <dd>
+          <span>{{ transaccion.titulo }}</span>
+        </dd>
+        <dt><span>Disposicion</span></dt>
+        <dd>
+          <span>{{ transaccion.disposicion }}</span>
+        </dd>
+        <dt><span>Codigo Documento</span></dt>
+        <dd>
+          <span>{{ transaccion.codigoDocumento }}</span>
+        </dd>
+        <dt><span>Numeracion Documento</span></dt>
+        <dd>
+          <span>{{ transaccion.numeracionDocumento }}</span>
+        </dd>
+        <dt><span>Proceso</span></dt>
+        <dd>
+          <div *ngIf="transaccion.proceso">
+            <a [routerLink]="['/proceso', transaccion.proceso.id, 'view']">{{ transaccion.proceso.codigo }}: {{ transaccion.proceso.descripcion }}</a>
+          </div>
+        </dd>
+        <dt><span>Tipo Documento</span></dt>
+        <dd>
+          <div *ngIf="transaccion.tipoDocumento">
+            <a [routerLink]="['/tipo-documento', transaccion.tipoDocumento.id, 'view']">{{ transaccion.tipoDocumento.codigo }}: {{ transaccion.tipoDocumento.descripcion }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Volver</span>
+      </button>
+
+      <button type="button" [routerLink]="['/transaccion', transaccion.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Editar</span>
+      </button>
+    </div>
+  </div>
+</div>

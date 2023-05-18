@@ -1,0 +1,158 @@
+<div class="col-12 d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-documento-heading" data-cy="DocumentoCreateUpdateHeading" *ngIf="editForm.controls.id.value == null">Crear Documento</h2>
+      <h2 id="jhi-documento-heading" data-cy="DocumentoCreateUpdateHeading" *ngIf="editForm.controls.id.value !== null">
+        Editar Documento
+      </h2>
+
+      <div class="row">
+        <jhi-alert-error></jhi-alert-error>
+
+        <!--  <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div> -->
+
+        <div class="col-12 col-md-2 col-sm-12 mb-3">
+          <label class="form-label" for="field_version">Versión</label>
+          <input type="number" class="form-control" name="version" id="field_version" data-cy="version" formControlName="version" />
+        </div>
+
+        <div class="col-12 col-md-3 col-sm-12 mb-3">
+          <label class="form-label" for="field_fechaElaboracion">Fecha de elaboración</label>
+          <div class="d-flex">
+            <input
+              id="field_fechaElaboracion"
+              data-cy="fechaElaboracion"
+              type="datetime-local"
+              class="form-control"
+              name="fechaElaboracion"
+              formControlName="fechaElaboracion"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="col-12 col-md-3 col-sm-12 mb-3">
+          <label class="form-label" for="field_fechaActualizacion">Fecha de actualización</label>
+          <div class="d-flex">
+            <input
+              id="field_fechaActualizacion"
+              data-cy="fechaActualizacion"
+              type="datetime-local"
+              class="form-control"
+              name="fechaActualizacion"
+              formControlName="fechaActualizacion"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="col-12 col-md-4 col-sm-12 mb-3">
+          <label class="form-label" for="field_acceso">Acceso</label>
+          <select class="form-control" name="acceso" formControlName="acceso" id="field_acceso" data-cy="acceso">
+            <option [ngValue]="null"></option>
+            <option *ngFor="let acceso of accesoValues" [value]="acceso">{{ acceso }}</option>
+          </select>
+        </div>
+
+        <div class="col-12 col-md-6 col-sm-12 col mb-3">
+          <label class="form-label" for="field_archivo">Adjuntar archivo</label>
+          <div>
+            <div *ngIf="editForm.get('archivo')!.value" class="form-text text-danger clearfix">
+              <a class="pull-start" (click)="openFile(editForm.get('archivo')!.value!, editForm.get('archivoContentType')!.value!)">Abrir</a
+              ><br />
+              <span class="pull-start"
+                >{{ editForm.get('archivoContentType')!.value }}, {{ byteSize(editForm.get('archivo')!.value!) }}</span
+              >
+              <button
+                type="button"
+                (click)="editForm.patchValue({ archivo: undefined, archivoContentType: undefined })"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input type="file" id="file_archivo" data-cy="archivo" (change)="setFileData($event, 'archivo', false)" />
+          </div>
+          <input type="hidden" class="form-control" name="archivo" id="field_archivo" data-cy="archivo" formControlName="archivo" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="archivoContentType"
+            id="field_archivoContentType"
+            formControlName="archivoContentType"
+          />
+        </div>
+
+        <div class="col-12 col-md-6 col-sm-12 mb-3">
+          <label class="form-label" for="field_enviarNotificacion">Enviar notificación a</label>
+          <input
+            type="text"
+            class="form-control"
+            name="enviarNotificacion"
+            id="field_enviarNotificacion"
+            data-cy="enviarNotificacion"
+            formControlName="enviarNotificacion"
+          />
+        </div>
+
+        <div class="col-12 col-md-12 col-sm-12 mb-3">
+          <label class="form-label" for="field_observaciones">Observaciones</label>
+          <input
+            type="text"
+            class="form-control"
+            name="observaciones"
+            id="field_observaciones"
+            data-cy="observaciones"
+            formControlName="observaciones"
+          />
+        </div>
+
+        <div class="col-12 col-md-12 col-sm-12 mb-3">
+          <label class="form-label" for="field_transaccion">Transacción</label>
+          <select
+            class="form-control"
+            id="field_transaccion"
+            data-cy="transaccion"
+            name="transaccion"
+            formControlName="transaccion"
+            [compareWith]="compareTransaccion"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="transaccionOption" *ngFor="let transaccionOption of transaccionsSharedCollection">
+              {{ transaccionOption.titulo }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-12 mb-3">
+          <button
+            type="button"
+            id="cancel-save"
+            data-cy="entityCreateCancelButton"
+            class="btn btn-secondary col-12"
+            (click)="previousState()"
+          >
+            <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancelar</span>
+          </button>
+        </div>
+
+        <div class="col-12 mb-3">
+          <button
+            type="submit"
+            id="save-entity"
+            data-cy="entityCreateSaveButton"
+            [disabled]="editForm.invalid || isSaving"
+            class="btn btn-primary col-12"
+          >
+            <fa-icon icon="save"></fa-icon>&nbsp;<span>Guardar</span>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

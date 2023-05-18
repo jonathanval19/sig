@@ -1,0 +1,133 @@
+<div>
+  <h2 id="page-heading" data-cy="DocumentoHeading">
+    <span>Documentos</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refrescar lista</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-documento"
+        [routerLink]="['/documento/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Crear nuevo Documento </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="documentos?.length === 0">
+    <span>Ningún Documentos encontrado</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="documentos && documentos.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span>ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="version">
+            <div class="d-flex">
+              <span>Version</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="fechaElaboracion">
+            <div class="d-flex">
+              <span>Fecha Elaboracion</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="fechaActualizacion">
+            <div class="d-flex">
+              <span>Fecha Actualizacion</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="acceso">
+            <div class="d-flex">
+              <span>Acceso</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="archivo">
+            <div class="d-flex">
+              <span>Archivo</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="transaccion.id">
+            <div class="d-flex">
+              <span>Transaccion</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let documento of documentos; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/documento', documento.id, 'view']">{{ documento.id }}</a>
+          </td>
+          <td>{{ documento.version }}</td>
+          <td>{{ documento.fechaElaboracion | formatMediumDatetime }}</td>
+          <td>{{ documento.fechaActualizacion | formatMediumDatetime }}</td>
+          <td>{{ documento.acceso }}</td>
+          <td>
+            <a *ngIf="documento.archivo" (click)="openFile(documento.archivo, documento.archivoContentType)">Abrir</a>
+          </td>
+          <!-- <td>
+            <a *ngIf="documento.archivo" (click)="openFile(documento.archivo, documento.archivoContentType)">Abrir</a>
+            <span *ngIf="documento.archivo">{{ documento.archivoContentType }}, {{ byteSize(documento.archivo) }}</span>
+          </td> -->
+          <td>
+            <div *ngIf="documento.transaccion">
+              <a [routerLink]="['/transaccion', documento.transaccion.id, 'view']">{{ documento.transaccion.titulo }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/documento', documento.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">Vista</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/documento', documento.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Editar</span>
+              </button>
+
+              <button type="submit" (click)="delete(documento)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Eliminar</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

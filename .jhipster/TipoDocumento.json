@@ -1,0 +1,31 @@
+{
+  "applications": "*",
+  "changelogDate": "20230511221357",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "tipo_documento",
+  "fields": [
+    {
+      "fieldName": "codigo",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "descripcion",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "TipoDocumento",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "transaccion",
+      "otherEntityRelationshipName": "tipoDocumento",
+      "relationshipName": "transaccion",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "no"
+}

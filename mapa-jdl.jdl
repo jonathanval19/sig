@@ -1,0 +1,47 @@
+enum TipoProceso {
+    ESTRATEGICO, VALOR, APOYO
+}
+
+enum Disposicion {
+    CREACION, ACTUALIZACION, ELIMINACION
+}
+
+enum Acceso {
+    PUBLICO, INTERNO, RESTRINGIDO, CONFIDENCIAL
+}
+
+entity Proceso {
+    tipoproceso TipoProceso
+    codigo String
+    descripcion String
+}
+
+entity TipoDocumento {
+    codigo String
+    descripcion String
+}
+
+entity Transaccion {
+	propietario String
+    titulo String
+    disposicion Disposicion
+    codigoDocumento String
+    numeracionDocumento String
+}
+
+entity Documento {
+	version Integer
+    fechaElaboracion Instant
+    fechaActualizacion Instant
+    acceso Acceso
+    archivo AnyBlob
+    enviarNotificacion String
+    observaciones String
+}
+
+relationship OneToMany {
+    Proceso to Transaccion{proceso}
+    TipoDocumento to Transaccion{tipoDocumento}
+    Transaccion to Documento{transaccion}
+}
+

@@ -1,0 +1,56 @@
+{
+  "applications": "*",
+  "changelogDate": "20230511221358",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "transaccion",
+  "fields": [
+    {
+      "fieldName": "propietario",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "titulo",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "disposicion",
+      "fieldType": "Disposicion",
+      "fieldValues": "CREACION,ACTUALIZACION,ELIMINACION"
+    },
+    {
+      "fieldName": "codigoDocumento",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "numeracionDocumento",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Transaccion",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "documento",
+      "otherEntityRelationshipName": "transaccion",
+      "relationshipName": "documento",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "proceso",
+      "otherEntityRelationshipName": "transaccion",
+      "relationshipName": "proceso",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "tipoDocumento",
+      "otherEntityRelationshipName": "transaccion",
+      "relationshipName": "tipoDocumento",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

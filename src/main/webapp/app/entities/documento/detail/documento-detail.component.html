@@ -1,0 +1,65 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="documento">
+      <h2 data-cy="documentoDetailsHeading"><span>Documento</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ documento.id }}</span>
+        </dd>
+        <dt><span>Version</span></dt>
+        <dd>
+          <span>{{ documento.version }}</span>
+        </dd>
+        <dt><span>Fecha Elaboracion</span></dt>
+        <dd>
+          <span>{{ documento.fechaElaboracion | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Fecha Actualizacion</span></dt>
+        <dd>
+          <span>{{ documento.fechaActualizacion | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Acceso</span></dt>
+        <dd>
+          <span>{{ documento.acceso }}</span>
+        </dd>
+        <dt><span>Archivo</span></dt>
+        <dd>
+          <div *ngIf="documento.archivo">
+            <a (click)="openFile(documento.archivo, documento.archivoContentType)">Abrir</a>
+            {{ documento.archivoContentType }}, {{ byteSize(documento.archivo) }}
+          </div>
+        </dd>
+        <dt><span>Enviar Notificacion</span></dt>
+        <dd>
+          <span>{{ documento.enviarNotificacion }}</span>
+        </dd>
+        <dt><span>Observaciones</span></dt>
+        <dd>
+          <span>{{ documento.observaciones }}</span>
+        </dd>
+        <dt><span>Transaccion</span></dt>
+        <dd>
+          <div *ngIf="documento.transaccion">
+            <a [routerLink]="['/transaccion', documento.transaccion.id, 'view']">{{ documento.transaccion.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Volver</span>
+      </button>
+
+      <button type="button" [routerLink]="['/documento', documento.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Editar</span>
+      </button>
+    </div>
+  </div>
+</div>

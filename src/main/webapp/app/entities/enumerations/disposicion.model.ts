@@ -1,0 +1,7 @@
+export enum Disposicion {
+  CREACION = 'CREACION',
+
+  ACTUALIZACION = 'ACTUALIZACION',
+
+  ELIMINACION = 'ELIMINACION',
+}

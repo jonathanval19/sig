@@ -1,0 +1,36 @@
+{
+  "applications": "*",
+  "changelogDate": "20230511221356",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "proceso",
+  "fields": [
+    {
+      "fieldName": "tipoproceso",
+      "fieldType": "TipoProceso",
+      "fieldValues": "ESTRATEGICO,VALOR,APOYO"
+    },
+    {
+      "fieldName": "codigo",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "descripcion",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Proceso",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "transaccion",
+      "otherEntityRelationshipName": "proceso",
+      "relationshipName": "transaccion",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "no"
+}

@@ -1,0 +1,131 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-transaccion-heading" data-cy="TransaccionCreateUpdateHeading" *ngIf="editForm.controls.id.value == null">
+        Nueva Transacción
+      </h2>
+      <h2 id="jhi-transaccion-heading" data-cy="TransaccionCreateUpdateHeading" *ngIf="editForm.controls.id.value !== null">
+        Editar Transacción
+      </h2>
+
+      <div class="row">
+        <jhi-alert-error></jhi-alert-error>
+
+        <!-- <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div> -->
+
+        <div class="col-12 col-md-7 col-sm-12 mb-3">
+          <label class="form-label" for="field_proceso">Proceso</label>
+          <select
+            class="form-control"
+            id="field_proceso"
+            data-cy="proceso"
+            name="proceso"
+            formControlName="proceso"
+            [compareWith]="compareProceso"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="procesoOption" *ngFor="let procesoOption of procesosSharedCollection">
+              {{ procesoOption.codigo }}: {{ procesoOption.descripcion }}
+            </option>
+          </select>
+        </div>
+
+        <div class="col-12 col-md-5 col-sm-12 mb-3">
+          <label class="form-label" for="field_propietario">Dueño de proceso</label>
+          <input
+            type="text"
+            class="form-control"
+            name="propietario"
+            id="field_propietario"
+            data-cy="propietario"
+            formControlName="propietario"
+          />
+        </div>
+
+        <div class="col-12 col-md-8 mb-3">
+          <label class="form-label" for="field_titulo">Título</label>
+          <input type="text" class="form-control" name="titulo" id="field_titulo" data-cy="titulo" formControlName="titulo" />
+        </div>
+
+        <div class="col-12 col-md-4 col-sm-6 mb-3">
+          <label class="form-label" for="field_tipoDocumento">Tipo Documento</label>
+          <select
+            class="form-control"
+            id="field_tipoDocumento"
+            data-cy="tipoDocumento"
+            name="tipoDocumento"
+            formControlName="tipoDocumento"
+            [compareWith]="compareTipoDocumento"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="tipoDocumentoOption" *ngFor="let tipoDocumentoOption of tipoDocumentosSharedCollection">
+              {{ tipoDocumentoOption.codigo }}: {{ tipoDocumentoOption.descripcion }}
+            </option>
+          </select>
+        </div>
+
+        <div class="col-md-4 col-sm-6 mb-3">
+          <label class="form-label" for="field_disposicion">Disposición</label>
+          <select class="form-control" name="disposicion" formControlName="disposicion" id="field_disposicion" data-cy="disposicion">
+            <option [ngValue]="null"></option>
+            <option *ngFor="let disposicion of disposicionValues" [value]="disposicion">{{ disposicion }}</option>
+          </select>
+        </div>
+
+        <div class="col-12 col-md-4 col-sm-6 mb-3">
+          <label class="form-label" for="field_codigoDocumento">Código Documento</label>
+          <input
+            type="text"
+            class="form-control"
+            name="codigoDocumento"
+            id="field_codigoDocumento"
+            data-cy="codigoDocumento"
+            formControlName="codigoDocumento"
+            readonly
+          />
+        </div>
+
+        <div class="col-12 col-md-4 col-sm-6 mb-3">
+          <label class="form-label" for="field_numeracionDocumento">Numeración Documento</label>
+          <input
+            type="text"
+            class="form-control"
+            name="numeracionDocumento"
+            id="field_numeracionDocumento"
+            data-cy="numeracionDocumento"
+            formControlName="numeracionDocumento"
+          />
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-12 col-md-6 mb-3">
+          <button
+            type="button"
+            id="cancel-save"
+            data-cy="entityCreateCancelButton"
+            class="btn btn-secondary col-12 col-md-12"
+            (click)="previousState()"
+          >
+            <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancelar</span>
+          </button>
+        </div>
+
+        <div class="col-12 col-md-6 mb-3">
+          <button
+            type="submit"
+            id="save-entity"
+            data-cy="entityCreateSaveButton"
+            [disabled]="editForm.invalid || isSaving"
+            class="btn btn-primary col-12 col-md-12"
+          >
+            <fa-icon icon="save"></fa-icon>&nbsp;<span>Guardar</span>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

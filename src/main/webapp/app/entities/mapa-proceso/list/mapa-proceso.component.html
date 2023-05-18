@@ -1,0 +1,66 @@
+<div class="d-flex justify-content-center m-3">
+  <h2><b>Mapa de procesos</b></h2>
+</div>
+
+<div class="row d-flex justify-content-center">
+  <div class="col-12 col-sm-12 col-md-12 col-lg-1 col-xl-1 texto-vertical">
+    <div class="border border-grey">
+      <span class="d-flex justify-content-center">Necesidades de las partes interesadas</span>
+    </div>
+  </div>
+
+  <div class="col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10">
+    <div class="border border-grey procesos mb-1">
+      <b>Procesos estratégicos</b>
+      <div class="panel-estrategico">
+        <div *ngFor="let proceso of procesos; trackBy: trackId" data-cy="entityTable">
+          <div *ngIf="proceso.tipoproceso == 'ESTRATEGICO'">
+            <button
+              [routerLink]="['/mapa-tipo-documento']"
+              [queryParams]="{ idproceso: proceso.id, descripcionproceso: proceso.descripcion }"
+              class="btnproceso estilo-estrategico"
+            >
+              {{ proceso.descripcion }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="border border-grey procesos">
+      <b>Procesos de valor</b>
+      <div class="">
+        <div class="panel-valor">
+          <div *ngFor="let proceso of procesos; trackBy: trackId" data-cy="entityTable">
+            <div *ngIf="proceso.tipoproceso == 'VALOR'">
+              <button [routerLink]="['/mapa-tipo-documento']" [queryParams]="{ idproceso: proceso.id, descripcionproceso: proceso.descripcion }" class="btnproceso estilo-valor">
+                {{ proceso.descripcion }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="border border-grey procesos mt-1">
+      <b>Procesos de apoyo</b>
+      <div class="">
+        <div class="panel-apoyo">
+          <div *ngFor="let proceso of procesos; trackBy: trackId" data-cy="entityTable">
+            <div *ngIf="proceso.tipoproceso == 'APOYO'">
+              <button [routerLink]="['/mapa-tipo-documento']" [queryParams]="{ idproceso: proceso.id, descripcionproceso: proceso.descripcion }" class="btnproceso estilo-apoyo">
+                {{ proceso.descripcion }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-sm-12 col-md-12 col-lg-1 col-xl-1 texto-vertical">
+    <div class="border border-grey">
+      <span class="d-flex justify-content-center">Satisfacción de las partes interesadas</span>
+    </div>
+  </div>
+</div>

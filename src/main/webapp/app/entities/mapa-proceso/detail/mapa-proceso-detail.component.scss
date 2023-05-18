@@ -1,0 +1,20 @@
+@import '~bootstrap/scss/functions';
+@import '~bootswatch/dist/litera/variables';
+@import '~bootstrap/scss/variables';
+
+/* ==========================================================================
+Mapa de procesos - Gráfico
+========================================================================== */
+
+.vertical-text {
+    writing-mode: vertical-rl;
+    /* vertical-rl para texto vertical de derecha a izquierda, vertical-lr para texto vertical de izquierda a derecha */
+    text-orientation: upright;
+    /* para que el texto se muestre de manera vertical */
+    height: 200px;
+    /* establece una altura para el div, para que el texto se muestre en varias líneas */
+    padding: 10px;
+    /* agrega un poco de espacio alrededor del texto */
+    background-color: #ccc;
+    /* establece un color de fondo para el div */
+}

@@ -1,0 +1,9 @@
+export enum Acceso {
+  'PUBLICO' = 'PUBLICO',
+
+  'INTERNO' = 'INTERNO',
+
+  'RESTRINGIDO' = 'RESTRINGIDO',
+
+  'CONFIDENCIAL' = 'CONFIDENCIAL',
+}

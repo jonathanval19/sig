@@ -1,0 +1,53 @@
+{
+  "applications": "*",
+  "changelogDate": "20230511221359",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "documento",
+  "fields": [
+    {
+      "fieldName": "version",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "fechaElaboracion",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "fechaActualizacion",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "acceso",
+      "fieldType": "Acceso",
+      "fieldValues": "PUBLICO,INTERNO,RESTRINGIDO,CONFIDENCIAL"
+    },
+    {
+      "fieldName": "archivo",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "enviarNotificacion",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "observaciones",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Documento",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "transaccion",
+      "otherEntityRelationshipName": "documento",
+      "relationshipName": "transaccion",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}
