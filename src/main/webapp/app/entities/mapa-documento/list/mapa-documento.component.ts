@@ -95,19 +95,23 @@ export class DocumentoComponent implements OnInit {
   protected onResponseSuccess(response: EntityArrayResponseType): void {
     const dataFromBody = this.fillComponentAttributesFromResponseBody(response.body);
     this.documentos = this.refineData(dataFromBody);
-    this.documentos.forEach(document => {
-      if (document.transaccion?.id == this.idtransaccion) {
-        if (document.version) {
-          if (document.version > this.maxVersion) {
-            this.maxVersion = document.version;
-            this.documento = document;
+    this.documentos.forEach(documento => {
+      if (documento.transaccion?.id == this.idtransaccion) {
+        if (documento.version) {
+          if (documento.version > this.maxVersion) {
+            this.maxVersion = documento.version;
+            this.documento = documento;
+            const elemento = document.getElementById("documentoSIG");
+            elemento?.classList.add("d-block");
           }
         }
       }
     });
     if(this.documento?.archivo){
-      //console.log('thisdocumento', this.documento);
       this.openFile(this.documento.archivo, this.documento.archivoContentType);
+    } else{
+      const elemento = document.getElementById("documentoSIG");
+            elemento?.classList.add("d-none");
     }
     
   }
