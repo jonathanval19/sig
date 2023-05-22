@@ -106,7 +106,7 @@ export class DocumentoComponent implements OnInit {
       }
     });
     if(this.documento?.archivo){
-      console.log('thisdocumento', this.documento);
+      //console.log('thisdocumento', this.documento);
       this.openFile(this.documento.archivo, this.documento.archivoContentType);
     }
     
