@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LocalStorageService, SessionStorageService } from 'ngx-webstorage';
@@ -18,7 +18,7 @@ export class AuthServerProvider {
     private localStorageService: LocalStorageService,
     private sessionStorageService: SessionStorageService,
     private applicationConfigService: ApplicationConfigService
-  ) {}
+  ) { }
 
   getToken(): string {
     const tokenInLocalStorage: string | null = this.localStorageService.retrieve('authenticationToken');
@@ -29,7 +29,9 @@ export class AuthServerProvider {
   login(credentials: Login): Observable<void> {
     return this.http
       .post<JwtToken>(this.applicationConfigService.getEndpointFor('api/authenticate'), credentials)
-      .pipe(map(response => this.authenticateSuccess(response, credentials.rememberMe)));
+      .pipe(map(response => { this.authenticateSuccess(response, credentials.rememberMe), console.log('estoy aqui id_token', response) }));
+
+
   }
 
   logout(): Observable<void> {

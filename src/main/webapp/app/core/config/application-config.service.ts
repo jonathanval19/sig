@@ -20,6 +20,8 @@ export class ApplicationConfigService {
   }
 
   getEndpointFor(api: string, microservice?: string): string {
+    console.log(`${this.endpointPrefix}${api}`);
+    
     if (microservice) {
       return `${this.endpointPrefix}services/${microservice}/${api}`;
     }
