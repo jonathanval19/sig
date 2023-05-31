@@ -6,7 +6,7 @@
 Mapa de procesos - Gráfico pantallas grandes
 ========================================================================== */
 
-@media (min-width: 992px) and (max-width: 1920px) {
+@media (min-width: 992px) {
     .btnproceso {
         border: 1px solid rgb(211, 202, 202);
         border-radius: 10px;
@@ -28,7 +28,7 @@ Mapa de procesos - Gráfico pantallas grandes
 
     .documentoVisor {
         width: 100%;
-        height: 400px;
+        height: 68vh;
     }
 }
 
@@ -58,7 +58,7 @@ Mapa de procesos - Gráfico pantallas medianas
 
     .documentoVisor {
         width: 100%;
-        height: 420px;
+        height: 64vh;
     }
 }
 
@@ -88,7 +88,7 @@ Mapa de procesos - Gráfico pantallas pequeñas
 
     .documentoVisor {
         width: 100%;
-        height: 430px;
+        height: 63vh;
     }
 }
 

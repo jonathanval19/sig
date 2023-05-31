@@ -1,10 +1,10 @@
-<div class="d-flex justify-content-center m-3">
+<div class="d-flex justify-content-center">
   <h2><b>Mapa de procesos</b></h2>
 </div>
 
 <div class="row d-flex justify-content-center">
   <div class="col-12 col-sm-12 col-md-12 col-lg-1 col-xl-1 texto-vertical">
-    <div class="border border-grey">
+    <div class="border border-grey" style="height: 100%">
       <span class="d-flex justify-content-center">Necesidades de las partes interesadas</span>
     </div>
   </div>
@@ -33,7 +33,11 @@
         <div class="panel-valor">
           <div *ngFor="let proceso of procesos; trackBy: trackId" data-cy="entityTable">
             <div *ngIf="proceso.tipoproceso == 'VALOR'">
-              <button [routerLink]="['/mapa-tipo-documento']" [queryParams]="{ idproceso: proceso.id, descripcionproceso: proceso.descripcion }" class="btnproceso estilo-valor">
+              <button
+                [routerLink]="['/mapa-tipo-documento']"
+                [queryParams]="{ idproceso: proceso.id, descripcionproceso: proceso.descripcion }"
+                class="btnproceso estilo-valor"
+              >
                 {{ proceso.descripcion }}
               </button>
             </div>
@@ -48,7 +52,11 @@
         <div class="panel-apoyo">
           <div *ngFor="let proceso of procesos; trackBy: trackId" data-cy="entityTable">
             <div *ngIf="proceso.tipoproceso == 'APOYO'">
-              <button [routerLink]="['/mapa-tipo-documento']" [queryParams]="{ idproceso: proceso.id, descripcionproceso: proceso.descripcion }" class="btnproceso estilo-apoyo">
+              <button
+                [routerLink]="['/mapa-tipo-documento']"
+                [queryParams]="{ idproceso: proceso.id, descripcionproceso: proceso.descripcion }"
+                class="btnproceso estilo-apoyo"
+              >
                 {{ proceso.descripcion }}
               </button>
             </div>
@@ -59,7 +67,7 @@
   </div>
 
   <div class="col-12 col-sm-12 col-md-12 col-lg-1 col-xl-1 texto-vertical">
-    <div class="border border-grey">
+    <div class="border border-grey" style="height: 100%">
       <span class="d-flex justify-content-center">Satisfacción de las partes interesadas</span>
     </div>
   </div>

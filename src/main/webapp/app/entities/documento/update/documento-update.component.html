@@ -14,12 +14,7 @@
           <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
         </div> -->
 
-        <div class="col-12 col-md-2 col-sm-12 mb-3">
-          <label class="form-label" for="field_version">Versión</label>
-          <input type="number" class="form-control" name="version" id="field_version" data-cy="version" formControlName="version" />
-        </div>
-
-        <div class="col-12 col-md-3 col-sm-12 mb-3">
+        <div class="col-12 col-md-6 col-sm-12 mb-3">
           <label class="form-label" for="field_fechaElaboracion">Fecha de elaboración</label>
           <div class="d-flex">
             <input
@@ -34,7 +29,7 @@
           </div>
         </div>
 
-        <div class="col-12 col-md-3 col-sm-12 mb-3">
+        <div class="col-12 col-md-6 col-sm-12 mb-3">
           <label class="form-label" for="field_fechaActualizacion">Fecha de actualización</label>
           <div class="d-flex">
             <input
@@ -49,41 +44,17 @@
           </div>
         </div>
 
+        <div class="col-12 col-md-2 col-sm-12 mb-3">
+          <label class="form-label" for="field_version">Versión</label>
+          <input type="number" class="form-control" name="version" id="field_version" data-cy="version" formControlName="version" />
+        </div>
+
         <div class="col-12 col-md-4 col-sm-12 mb-3">
           <label class="form-label" for="field_acceso">Acceso</label>
           <select class="form-control" name="acceso" formControlName="acceso" id="field_acceso" data-cy="acceso">
             <option [ngValue]="null"></option>
             <option *ngFor="let acceso of accesoValues" [value]="acceso">{{ acceso }}</option>
           </select>
-        </div>
-
-        <div class="col-12 col-md-6 col-sm-12 col mb-3">
-          <label class="form-label" for="field_archivo">Adjuntar archivo</label>
-          <div>
-            <div *ngIf="editForm.get('archivo')!.value" class="form-text text-danger clearfix">
-              <a class="pull-start" (click)="openFile(editForm.get('archivo')!.value!, editForm.get('archivoContentType')!.value!)">Abrir</a
-              ><br />
-              <span class="pull-start"
-                >{{ editForm.get('archivoContentType')!.value }}, {{ byteSize(editForm.get('archivo')!.value!) }}</span
-              >
-              <button
-                type="button"
-                (click)="editForm.patchValue({ archivo: undefined, archivoContentType: undefined })"
-                class="btn btn-secondary btn-xs pull-end"
-              >
-                <fa-icon icon="times"></fa-icon>
-              </button>
-            </div>
-            <input type="file" id="file_archivo" data-cy="archivo" (change)="setFileData($event, 'archivo', false)" />
-          </div>
-          <input type="hidden" class="form-control" name="archivo" id="field_archivo" data-cy="archivo" formControlName="archivo" />
-          <input
-            type="hidden"
-            class="form-control"
-            name="archivoContentType"
-            id="field_archivoContentType"
-            formControlName="archivoContentType"
-          />
         </div>
 
         <div class="col-12 col-md-6 col-sm-12 mb-3">
@@ -95,18 +66,6 @@
             id="field_enviarNotificacion"
             data-cy="enviarNotificacion"
             formControlName="enviarNotificacion"
-          />
-        </div>
-
-        <div class="col-12 col-md-12 col-sm-12 mb-3">
-          <label class="form-label" for="field_observaciones">Observaciones</label>
-          <input
-            type="text"
-            class="form-control"
-            name="observaciones"
-            id="field_observaciones"
-            data-cy="observaciones"
-            formControlName="observaciones"
           />
         </div>
 
@@ -125,6 +84,49 @@
               {{ transaccionOption.titulo }}
             </option>
           </select>
+        </div>
+
+        <div class="col-12 col-md-12 col-sm-12 mb-3">
+          <label class="form-label" for="field_observaciones">Observaciones</label>
+          <input
+            type="text"
+            class="form-control"
+            name="observaciones"
+            id="field_observaciones"
+            data-cy="observaciones"
+            formControlName="observaciones"
+          />
+        </div>
+
+        
+
+        <div class="col-12 col-md-6 col-sm-12 col mb-3">
+          <label class="form-label" for="field_archivo">Adjuntar archivo</label>
+          <div>
+            <div *ngIf="editForm.get('archivo')!.value" class="form-text text-danger clearfix">
+             <!--  <a class="pull-start" (click)="openFile(editForm.get('archivo')!.value!, editForm.get('archivoContentType')!.value!)">Abrir</a
+              > -->
+              <span class="pull-start"
+                >{{ editForm.get('archivoContentType')!.value }}, {{ byteSize(editForm.get('archivo')!.value!) }}</span
+              >
+              <button
+                type="button"
+                (click)="editForm.patchValue({ archivo: undefined, archivoContentType: undefined })"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input *ngIf="!editForm.get('archivo')!.value" type="file" id="file_archivo" data-cy="archivo" (change)="setFileData($event, 'archivo', false)" />
+          </div>
+          <input type="hidden" class="form-control" name="archivo" id="field_archivo" data-cy="archivo" formControlName="archivo" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="archivoContentType"
+            id="field_archivoContentType"
+            formControlName="archivoContentType"
+          />
         </div>
       </div>
 

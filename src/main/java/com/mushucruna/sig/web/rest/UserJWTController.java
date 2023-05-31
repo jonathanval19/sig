@@ -70,7 +70,12 @@ public class UserJWTController {
                 AdminUserDTO userDTO = new AdminUserDTO();
 
                 userDTO.setLogin(userFit.getUsuario());
-                userDTO.setEmail("mushuc@mushucruna.com");
+                userDTO.setEmail(userFit.getUsuario() + "@mushucruna.com");
+
+                String[] apellidosNombres = separarApellidosNombres(userFit.getNombreCliente());
+
+                userDTO.setFirstName(apellidosNombres[2] + " " + apellidosNombres[3]);
+                userDTO.setLastName(apellidosNombres[0] + " " + apellidosNombres[1]);
 
                 // Por seguridad jhipster crea como rol user
                 Set<String> authorities = new HashSet<>();
@@ -85,7 +90,7 @@ public class UserJWTController {
                 AdminUserDTO userDTO = new AdminUserDTO();
 
                 userDTO.setLogin(userFit.getUsuario());
-                // userDTO.setEmail("hola@mushucruna.com");
+                userDTO.setEmail(userFit.getUsuario() + "@mushucruna.com");
 
                 String[] apellidosNombres = separarApellidosNombres(userFit.getNombreCliente());
 

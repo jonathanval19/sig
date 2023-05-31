@@ -6,10 +6,13 @@
 Mapa de procesos - Gráfico pantallas grandes
 ========================================================================== */
 
-@media (min-width: 992px) and (max-width: 1920px) {
+@media (min-width: 992px) {
   .texto-vertical {
     writing-mode: vertical-lr;
-    width: 60px;
+    width: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .btnproceso {
@@ -72,6 +75,7 @@ Mapa de procesos - Gráfico pantallas medianas
     width: 100%;
     height: 50%;
     text-align: center;
+ 
   }
 
   .btnproceso {
