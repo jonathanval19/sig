@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { EMPTY, Observable, of } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 
 import { TransaccionFormService, TransaccionFormGroup } from './transaccion-form.service';
@@ -12,6 +12,7 @@ import { ProcesoService } from 'app/entities/proceso/service/proceso.service';
 import { ITipoDocumento } from 'app/entities/tipo-documento/tipo-documento.model';
 import { TipoDocumentoService } from 'app/entities/tipo-documento/service/tipo-documento.service';
 import { Disposicion } from 'app/entities/enumerations/disposicion.model';
+import { mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'jhi-transaccion-update',
@@ -33,7 +34,7 @@ export class TransaccionUpdateComponent implements OnInit {
     protected procesoService: ProcesoService,
     protected tipoDocumentoService: TipoDocumentoService,
     protected activatedRoute: ActivatedRoute
-  ) {}
+  ) { }
 
   compareProceso = (o1: IProceso | null, o2: IProceso | null): boolean => this.procesoService.compareProceso(o1, o2);
 
@@ -46,9 +47,12 @@ export class TransaccionUpdateComponent implements OnInit {
       if (transaccion) {
         this.updateForm(transaccion);
       }
+      this.getCodigoDocumento(transaccion);
 
       this.loadRelationshipsOptions();
+
     });
+
   }
 
   previousState(): void {
@@ -118,7 +122,15 @@ export class TransaccionUpdateComponent implements OnInit {
       .subscribe((tipoDocumentos: ITipoDocumento[]) => (this.tipoDocumentosSharedCollection = tipoDocumentos));
   }
 
-  getCodigoDocumento(){
-    
+  getCodigoDocumento(transaccion: ITransaccion) {
+    //alert(transaccion.id);
+    this.subscribeToFindCodeResponse(this.transaccionService.findcode(transaccion));
   }
+
+  protected subscribeToFindCodeResponse(result: Observable<HttpResponse<ITransaccion>>): void {
+    result.subscribe((data) => console.log(data.body));
+  }
+
+
+
 }

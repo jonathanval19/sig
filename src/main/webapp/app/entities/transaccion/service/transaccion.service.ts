@@ -22,6 +22,10 @@ export class TransaccionService {
     return this.http.post<ITransaccion>(this.resourceUrl, transaccion, { observe: 'response' });
   }
 
+  findcode(transaccion: ITransaccion): Observable<EntityResponseType> {
+    return this.http.post<ITransaccion>(`${this.resourceUrl}/code/find`, transaccion, { observe: 'response' });
+  }
+
   update(transaccion: ITransaccion): Observable<EntityResponseType> {
     return this.http.put<ITransaccion>(`${this.resourceUrl}/${this.getTransaccionIdentifier(transaccion)}`, transaccion, {
       observe: 'response',

@@ -59,6 +59,29 @@ public class TransaccionResource {
     }
 
     /**
+     * {@code POST  /transaccions} : Create a new transaccion.
+     *
+     * @param transaccion the transaccion to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new transaccion, or with status {@code 400 (Bad Request)} if the transaccion has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @PostMapping("/transaccions/code/find")
+    public ResponseEntity<Transaccion> findcode(@RequestBody Transaccion transaccion) throws URISyntaxException {
+        log.debug("REST request to find code Transaccion : {}", transaccion);
+        
+        Optional<Transaccion> findtransaccion = transaccionRepository.findById(transaccion.getId());
+        Transaccion tra = findtransaccion.get();
+
+        System.out.println("*********************************transaccions*************************************");
+        System.out.println(tra.getProceso().getCodigo()+tra.getTipoDocumento().getCodigo());
+        
+        return ResponseEntity
+            .created(new URI("/api/transaccions/code/find"))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, tra.getCodigoDocumento()))
+            .body(tra);
+    }
+
+    /**
      * {@code PUT  /transaccions/:id} : Updates an existing transaccion.
      *
      * @param id the id of the transaccion to save.
